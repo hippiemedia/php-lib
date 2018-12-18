@@ -9,5 +9,13 @@
             "email": "florian.klein@free.fr"
         }
     ],
-    "require": {}
+    "require": {
+        "lstrojny/functional-php": "^1.9",
+        "willdurand/negotiation": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hippiemedia\\": "src/"
+        }
+    }
 }
