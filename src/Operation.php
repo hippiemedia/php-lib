@@ -3,6 +3,8 @@
 namespace Hippiemedia;
 
 use Functional as f;
+use Hippiemedia\Link;
+use Hippiemedia\Field;
 
 final class Operation
 {
@@ -25,6 +27,20 @@ final class Operation
         $this->description = $description;
         $this->fields = $fields;
         $this->links = $links;
+    }
+
+    public static function whatever(array $data = [])
+    {
+        return new self(
+            $data['rel'] ?? 'rel',
+            $data['method'] ?? 'method',
+            $data['url'] ?? 'url',
+            $data['templated'] ?? false,
+            $data['title'] ?? 'title',
+            $data['description'] ?? 'description',
+            $data['fields'] ?? [Field::whatever()],
+            $data['links'] ?? [Link::whatever()]
+        );
     }
 
     public function rel(): string

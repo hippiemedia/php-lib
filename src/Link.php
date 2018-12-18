@@ -20,6 +20,17 @@ final class Link
         $this->type = $type;
     }
 
+    public static function whatever(array $data = [])
+    {
+        return new self(
+            $data['rel'] ?? 'rel',
+            $data['href'] ?? 'href',
+            $data['templated'] ?? false,
+            $data['title'] ?? 'title',
+            $data['type'] ?? 'type'
+        );
+    }
+
     public function rel(): string
     {
         return $this->rel;

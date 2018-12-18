@@ -17,5 +17,8 @@
         "psr-4": {
             "Hippiemedia\\": "src/"
         }
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^5.1"
     }
 }
