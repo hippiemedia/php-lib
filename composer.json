@@ -1,0 +1,13 @@
+{
+    "name": "hippiemedia/resource",
+    "description": "Represent hypermedia resources and serialize them in different formats",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Klein Florian",
+            "email": "florian.klein@free.fr"
+        }
+    ],
+    "require": {}
+}
