@@ -10,8 +10,9 @@
         }
     ],
     "require": {
-        "lstrojny/functional-php": "^1.9",
-        "willdurand/negotiation": "^2.3"
+        "lstrojny/functional-php": "^1.0",
+        "willdurand/negotiation": "^2.0",
+        "symfony/routing": "^3.0 | ^4.0"
     },
     "autoload": {
         "psr-4": {
@@ -19,6 +20,6 @@
         }
     },
     "require-dev": {
-        "phpspec/phpspec": "^5.1"
+        "phpspec/phpspec": "^4.0 | ^5.0"
     }
 }
