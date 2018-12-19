@@ -17,13 +17,15 @@ final class SymfonyRouter implements UrlGenerator
 
     function url(string $route, array $params = []): string
     {
-        return $this->router->generate($route, $params, RouterInterface::ABSOLUTE_URL);
+        return $this->router->generate($route, array_map('strval', $params), RouterInterface::ABSOLUTE_URL);
     }
 
     function template(string $route, array $params = []): string
     {
         $route = $this->router->getRouteCollection()->get($route);
 
-        return $route->getPath().(empty($params) ? '' : '?'.urldecode(http_build_query($params)));
+        $context = $this->router->getContext();
+
+        return sprintf('%s://%s/%s', $context->getScheme(), $context->getHost(), ltrim($route->getPath(), '/').(empty($params) ? '' : '?'.urldecode(http_build_query($params))));
     }
 }

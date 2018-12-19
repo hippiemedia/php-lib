@@ -19,15 +19,17 @@ final class Siren implements Format
         return [
             'class' => [],
             'properties' => $resource->state,
-            'links' => f\map(array_values($resource->links), function($link) {
+            'links' => array_merge(f\map(array_values($resource->links), function($link) {
                 return [
-                    'rel' => [$link->rel],
+                    'rel' => $link->rel,
                     'class' => [],
                     'href' => $link->href,
                     'title' => $link->title,
                     'type' => $link->type,
                 ];
-            }),
+            }), array_reduce(array_keys($resource->embedded), function($acc, $rel) use($resource) {
+                 return array_merge($acc, f\map(array_values($resource->embedded[$rel]), f\invoker('selfLink', [['account']])));
+            }, [])),
             'entities' => array_reduce(array_keys($resource->embedded), function($acc, $rel) use($resource) {
                 $resources = $resource->embedded[$rel];
                 return array_merge($acc, f\map($resources, function($resource) use($rel) {

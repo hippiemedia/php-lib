@@ -13,6 +13,6 @@ class SirenSpec extends ObjectBehavior
     {
         $siren = $this(Resource::whatever());
 
-        $siren['links']->shouldHaveCount(1);
+        $siren['links']->shouldHaveCount(2);
     }
 }

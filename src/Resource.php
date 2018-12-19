@@ -31,4 +31,9 @@ final class Resource
             $data['embedded'] ?? ['rel' => [self::whatever(['embedded' => []])]]
         );
     }
+
+    public function selfLink(array $rels = ['self']): Link
+    {
+        return new Link($rels, $this->url);
+    }
 }

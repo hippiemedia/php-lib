@@ -11,7 +11,7 @@ final class Link
     public $title;
     public $description;
 
-    public function __construct(string $rel, string $href, bool $templated = false, string $title = null, string $type = null)
+    public function __construct(array $rel, string $href, bool $templated = false, string $title = null, string $type = null)
     {
         $this->rel = $rel;
         $this->href = $href;
@@ -23,7 +23,7 @@ final class Link
     public static function whatever(array $data = [])
     {
         return new self(
-            $data['rel'] ?? 'rel',
+            $data['rel'] ?? ['rel'],
             $data['href'] ?? 'href',
             $data['templated'] ?? false,
             $data['title'] ?? 'title',
@@ -31,8 +31,13 @@ final class Link
         );
     }
 
-    public function rel(): string
+    public function rels(): array
     {
         return $this->rel;
+    }
+
+    public function rel(): string
+    {
+        return $this->rel[0] ?? 'self';
     }
 }
