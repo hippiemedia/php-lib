@@ -19,7 +19,7 @@ final class Hal implements Format
         $linksByRel = array_merge(
             f\group($resource->links, f\invoker('rel')),
             f\group(f\map($resource->operations, function($operation) {
-                return new Link([$operation->rel], $operation->url, $operation->templated, $operation->title, 'application/prs.hal-forms+json');
+                return new Link([$operation->rel], $operation->url, $operation->templated, $operation->title, $operation->description, 'application/prs.hal-forms+json');
             }), f\invoker('rel')),
             f\map($resource->embedded, function($resources, $rel) {
                 return f\map($resources, f\invoker('selfLink', [[$rel]]));

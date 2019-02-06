@@ -11,12 +11,13 @@ final class Link
     public $title;
     public $description;
 
-    public function __construct(array $rel, string $href, bool $templated = false, string $title = null, string $type = null)
+    public function __construct(array $rel, string $href, bool $templated = false, string $title = null, string $description = null, string $type = null)
     {
         $this->rel = $rel;
         $this->href = $href;
         $this->templated = $templated;
         $this->title = $title;
+        $this->description = $description;
         $this->type = $type;
     }
 
@@ -27,6 +28,7 @@ final class Link
             $data['href'] ?? 'href',
             $data['templated'] ?? false,
             $data['title'] ?? 'title',
+            $data['description'] ?? 'description',
             $data['type'] ?? 'type'
         );
     }
