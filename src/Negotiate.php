@@ -7,4 +7,6 @@ use Hippiemedia\Format;
 interface Negotiate
 {
     public function __invoke(?string $accept): Format;
+
+    public function availableFormats(Format $except): array;
 }

@@ -32,4 +32,11 @@ final class WilldurandNegotiator implements Negotiate
         }
         return current($possible[$negotiated]);
     }
+
+    public function availableFormats(Format $except): array
+    {
+        return array_filter($this->formats, function($format) use($except) {
+            return $format->accepts() !== $except->accepts();
+        });
+    }
 }
