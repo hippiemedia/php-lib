@@ -21,9 +21,6 @@ final class Hal implements Format
             f\group(f\map($resource->operations, function($operation) {
                 return new Link([$operation->rel], $operation->url, $operation->templated, $operation->title, $operation->description, 'application/prs.hal-forms+json');
             }), f\invoker('rel')),
-            f\map($resource->embedded, function($resources, $rel) {
-                return f\map($resources, f\invoker('selfLink', [[$rel]]));
-            })
         );
 
         $operationsByRel = f\group($resource->operations, f\invoker('rel'));

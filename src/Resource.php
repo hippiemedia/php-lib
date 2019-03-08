@@ -3,6 +3,7 @@
 namespace Hippiemedia;
 
 use Hippiemedia\Link;
+use Functional as f;
 
 final class Resource
 {
@@ -16,7 +17,10 @@ final class Resource
     {
         $this->url = $url;
         $this->state = $state;
-        $this->links = $links;
+        $this->links = array_merge($links, array_reduce(array_keys($embedded), function($carry, $rel) use($embedded) {
+            $resources = $embedded[$rel];
+            return array_merge($carry, f\invoke($resources, 'selfLink', [[$rel]]));
+        }, []));
         $this->operations = $operations;
         $this->embedded = $embedded;
     }

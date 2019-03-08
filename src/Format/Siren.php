@@ -16,15 +16,10 @@ final class Siren implements Format
 
     public function __invoke(Resource $resource): iterable
     {
-
-        $links = array_merge($resource->links, array_reduce(array_keys($resource->embedded), function($acc, $rel) use($resource) {
-             return array_merge($acc, f\map(array_values($resource->embedded[$rel]), f\invoker('selfLink', [[$rel]])));
-        }, []));
-
         return [
             'class' => [],
             'properties' => $resource->state,
-            'links' => f\map(array_values($links), function($link) {
+            'links' => f\map(array_values($resource->links), function($link) {
                 return [
                     'rel' => $link->rel,
                     'class' => [],
