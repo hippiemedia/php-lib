@@ -6,6 +6,7 @@ use Functional as f;
 use Hippiemedia\Format;
 use Hippiemedia\Resource;
 use Hippiemedia\Link;
+use DocteurKlein\JsonChunks\Encode;
 
 final class Hal implements Format
 {
@@ -15,6 +16,11 @@ final class Hal implements Format
     }
 
     public function __invoke(Resource $resource): iterable
+    {
+        return Encode::from($this->normalize($resource));
+    }
+
+    private function normalize(Resource $resource): iterable
     {
         $linksByRel = array_merge(
             f\group($resource->links, f\invoker('rel')),
@@ -40,7 +46,7 @@ final class Hal implements Format
             }),
             '_embedded' => array_merge(f\map($operationsByRel, function($operations) {
                 return f\map(array_values($operations), function($operation) {
-                    return $this(new Resource($operation->url, [
+                    return $this->normalize(new Resource($operation->url, [
                         '_templates' => [
                             'default' => [
                                 'title' => $operation->title,
@@ -63,8 +69,8 @@ final class Hal implements Format
                     ], array_merge([new Link(['self'], $operation->url, $operation->templated)], $operation->links), []));
                 });
             }), f\map($resource->embedded, function($resources) {
-                return f\map($resources, $this);
-            }, $this))
+                return array_map([$this, 'normalize'], $resources);
+            }))
         ]);
     }
 }

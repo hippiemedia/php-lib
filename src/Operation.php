@@ -33,7 +33,7 @@ final class Operation
     {
         return new self(
             $data['rel'] ?? 'rel',
-            $data['method'] ?? 'method',
+            $data['method'] ?? 'POST',
             $data['url'] ?? 'url',
             $data['templated'] ?? false,
             $data['title'] ?? 'title',

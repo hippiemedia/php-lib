@@ -7,7 +7,7 @@ A php library to describe resources and serve different hypermedia formats based
 
 ## how ?
 
- - Declare your different resources:
+Example integration with a symfony controller
 
 ```php
 use Hippiemedia\Resource;
@@ -16,7 +16,6 @@ use Hippiemedia\Operation;
 use Hippiemedia\Field;
 use Hippiemedia\Format;
 use Hippiemedia\Negotiate;
-use Hippiemedia\UrlGenerator;
 
 final class Hypermedia
 {

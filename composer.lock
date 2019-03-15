@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cbe09d71af04b4b0611ae80efa114778",
+    "content-hash": "59a18a20bafc2d4c1125bb79cdf1037a",
     "packages": [
+        {
+            "name": "docteurklein/json-chunks",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/docteurklein/json-chunks.git",
+                "reference": "61199e6ba97880191854bb75d5d50f2d8f345e89"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/docteurklein/json-chunks/zipball/61199e6ba97880191854bb75d5d50f2d8f345e89",
+                "reference": "61199e6ba97880191854bb75d5d50f2d8f345e89",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^4.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DocteurKlein\\JsonChunks\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Klein Florian",
+                    "email": "florian.klein@free.fr"
+                }
+            ],
+            "description": "JSON encoder using generators to stream",
+            "time": "2018-09-13T09:49:59+00:00"
+        },
         {
             "name": "lstrojny/functional-php",
             "version": "1.9.0",
@@ -144,83 +180,6 @@
                 "functional"
             ],
             "time": "2018-12-03T16:47:05+00:00"
-        },
-        {
-            "name": "symfony/routing",
-            "version": "v4.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/routing.git",
-                "reference": "649460207e77da6c545326c7f53618d23ad2c866"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/649460207e77da6c545326c7f53618d23ad2c866",
-                "reference": "649460207e77da6c545326c7f53618d23ad2c866",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1.3"
-            },
-            "conflict": {
-                "symfony/config": "<4.2",
-                "symfony/dependency-injection": "<3.4",
-                "symfony/yaml": "<3.4"
-            },
-            "require-dev": {
-                "doctrine/annotations": "~1.0",
-                "psr/log": "~1.0",
-                "symfony/config": "~4.2",
-                "symfony/dependency-injection": "~3.4|~4.0",
-                "symfony/expression-language": "~3.4|~4.0",
-                "symfony/http-foundation": "~3.4|~4.0",
-                "symfony/yaml": "~3.4|~4.0"
-            },
-            "suggest": {
-                "doctrine/annotations": "For using the annotation loader",
-                "symfony/config": "For using the all-in-one router or any loader",
-                "symfony/dependency-injection": "For loading routes from a service",
-                "symfony/expression-language": "For using expression matching",
-                "symfony/http-foundation": "For using a Symfony Request object",
-                "symfony/yaml": "For using the YAML loader"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Routing\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Routing Component",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "router",
-                "routing",
-                "uri",
-                "url"
-            ],
-            "time": "2018-12-03T22:08:12+00:00"
         },
         {
             "name": "willdurand/negotiation",
