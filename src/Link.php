@@ -10,8 +10,9 @@ final class Link
     public $type;
     public $title;
     public $description;
+    public $isDeprecated;
 
-    public function __construct(array $rel, string $href, bool $templated = false, string $title = null, string $description = null, string $type = null)
+    public function __construct(array $rel, string $href, bool $templated = false, string $title = null, string $description = null, string $type = null, bool $isDeprecated = false)
     {
         $this->rel = $rel;
         $this->href = $href;
@@ -19,6 +20,7 @@ final class Link
         $this->title = $title;
         $this->description = $description;
         $this->type = $type;
+        $this->isDeprecated = $isDeprecated;
     }
 
     public static function whatever(array $data = [])

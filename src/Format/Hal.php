@@ -28,13 +28,14 @@ final class Hal implements Format
         return array_merge($resource->state, [
             '_links' => f\map($linksByRel, function($links) {
                 return f\map(array_values($links), function($link) {
-                    return [
+                    return array_filter([
                         'href' => $link->href,
                         'templated' => $link->templated,
                         'type' => $link->type,
                         'title' => $link->title,
                         'description' => $link->description,
-                    ];
+                        'deprecation' => $link->isDeprecated,
+                    ]);
                 });
             }),
             '_embedded' => array_merge(f\map($operationsByRel, function($operations) {
