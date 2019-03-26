@@ -12,17 +12,20 @@ final class Resource
     public $links;
     public $operations;
     public $embedded;
+    public $isDeprecated;
 
-    public function __construct(string $url, array $state, array $links = [], array $operations = [], array $embedded = [])
+    public function __construct(string $url, array $state, array $links = [], array $operations = [], array $embedded = [], bool $isDeprecated = false)
     {
         $this->url = $url;
         $this->state = $state;
-        $this->links = array_merge($links, array_reduce(array_keys($embedded), function($carry, $rel) use($embedded) {
+        $this->isDeprecated = $isDeprecated;
+        $this->operations = $operations;
+        $this->embedded = $embedded;
+
+        $this->links = array_merge([$this->selfLink()], $links, array_reduce(array_keys($embedded), function($carry, $rel) use($embedded) {
             $resources = $embedded[$rel];
             return array_merge($carry, f\invoke($resources, 'selfLink', [[$rel]]));
         }, []));
-        $this->operations = $operations;
-        $this->embedded = $embedded;
     }
 
     public static function whatever(array $data = [])
@@ -32,12 +35,13 @@ final class Resource
             $data['state'] ?? ['state'],
             $data['links'] ?? [Link::whatever()],
             $data['operations'] ?? [Operation::whatever()],
-            $data['embedded'] ?? ['rel' => [self::whatever(['embedded' => []])]]
+            $data['embedded'] ?? ['rel' => [self::whatever(['embedded' => []])]],
+            $data['is_deprecated'] ?? false
         );
     }
 
     public function selfLink(array $rels = ['self']): Link
     {
-        return new Link($rels, $this->url);
+        return new Link($rels, $this->url, false, null, null, null, $this->isDeprecated);
     }
 }
