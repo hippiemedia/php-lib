@@ -6,6 +6,7 @@ use Functional as f;
 use Hippiemedia\Format;
 use Hippiemedia\Resource;
 use Hippiemedia\Link;
+use DocteurKlein\JsonChunks\Encode;
 
 final class Siren implements Format
 {
@@ -15,6 +16,11 @@ final class Siren implements Format
     }
 
     public function __invoke(Resource $resource): iterable
+    {
+        return Encode::from($this->normalize($resource));
+    }
+
+    private function normalize(Resource $resource): iterable
     {
         return [
             'class' => [],
@@ -31,7 +37,7 @@ final class Siren implements Format
             'entities' => array_reduce(array_keys($resource->embedded), function($acc, $rel) use($resource) {
                 $resources = $resource->embedded[$rel];
                 return array_merge($acc, f\map($resources, function($resource) use($rel) {
-                    return array_merge($this($resource), ['rel' => [$rel]]);
+                    return array_merge($this->normalize($resource), ['rel' => [$rel]]);
                 }));
             }, []),
             'actions' => f\map(array_values($resource->operations), function($operation) {

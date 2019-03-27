@@ -35,7 +35,7 @@ final class Resource
             $data['state'] ?? ['state'],
             $data['links'] ?? [Link::whatever()],
             $data['operations'] ?? [Operation::whatever()],
-            $data['embedded'] ?? ['rel' => [self::whatever(['embedded' => []])]],
+            $data['embedded'] ?? ['rel' => [self::whatever(['state' => ['SUB'], 'embedded' => []])]],
             $data['is_deprecated'] ?? false
         );
     }
