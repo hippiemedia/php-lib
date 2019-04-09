@@ -6,6 +6,7 @@ use Hippiemedia\Format\Hal;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Hippiemedia\Resource;
+use Hippiemedia\Link;
 
 class HalSpec extends ObjectBehavior
 {
@@ -23,5 +24,14 @@ class HalSpec extends ObjectBehavior
         ]));
         $hal['_links']['reltype'][0]['deprecation']->shouldBe(true);
         $hal['_links']->shouldHaveCount(3);
+    }
+
+    function it_always_has_link_href()
+    {
+        $hal = $this(Resource::whatever([
+            'links' => [$l = new Link(['empty'], '')],
+        ]));
+        $hal['_links']['empty'][0]->shouldHaveKey('href');
+        $hal['_links']['empty'][0]->shouldNotHaveKey('title');
     }
 }
