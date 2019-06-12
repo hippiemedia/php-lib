@@ -5,6 +5,7 @@ namespace Hippiemedia;
 use Functional as f;
 use Hippiemedia\Link;
 use Hippiemedia\Field;
+use Rize\UriTemplate;
 
 final class Operation
 {
@@ -14,15 +15,22 @@ final class Operation
     public $templated;
     public $title;
     public $description;
-    public $fields;
+    public $urlFields = [];
+    public $fields = [];
     public $links;
+    private $uriTemplate;
 
-    public function __construct(string $rel, string $method, string $url, bool $templated, string $title, string $description = '', array $fields = [], array $links = [])
+    public function __construct(string $rel, string $method, string $url, string $title, string $description = '', array $fields = [], array $links = [])
     {
         $this->rel = $rel;
         $this->method = $method;
         $this->url = $url;
-        $this->templated = $templated;
+        $this->uriTemplate = new UriTemplate($this->url);
+        $parsed = $this->uriTemplate->extract($this->url, $this->url);
+        $this->urlFields = array_map(function($key, $value) {
+            return (object)['name' => $key, 'value' => $value];
+        }, array_keys($parsed), $parsed);
+        $this->templated = !empty($this->urlFields);
         $this->title = $title;
         $this->description = $description;
         $this->fields = $fields;
@@ -35,7 +43,6 @@ final class Operation
             $data['rel'] ?? 'rel',
             $data['method'] ?? 'method',
             $data['url'] ?? 'url',
-            $data['templated'] ?? false,
             $data['title'] ?? 'title',
             $data['description'] ?? 'description',
             $data['fields'] ?? [Field::whatever()],

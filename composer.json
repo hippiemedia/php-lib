@@ -12,7 +12,8 @@
     "require": {
         "lstrojny/functional-php": "^1.0",
         "willdurand/negotiation": "^2.0",
-        "symfony/routing": "^3.0 | ^4.0"
+        "symfony/routing": "^3.0 | ^4.0",
+        "rize/uri-template": "^0.3.2"
     },
     "autoload": {
         "psr-4": {

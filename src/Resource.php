@@ -42,6 +42,6 @@ final class Resource
 
     public function selfLink(array $rels = ['self']): Link
     {
-        return new Link($rels, $this->url, false, null, null, null, $this->isDeprecated);
+        return new Link($rels, $this->url, null, null, null, $this->isDeprecated);
     }
 }
