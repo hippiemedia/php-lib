@@ -4,6 +4,7 @@ namespace Hippiemedia\Format;
 
 use Functional as f;
 use Hippiemedia\Format;
+use Hippiemedia\Operation;
 use Hippiemedia\Resource;
 use Hippiemedia\Link;
 
@@ -31,10 +32,14 @@ final class OpenApi3 implements Format
             ]],
             $this->defaults,
             ['paths' => iterator_to_array((function() use($resource) {
+                /** @var Link $link */
                 foreach ($resource->links as $link) {
                     $path = parse_url($link->href, PHP_URL_PATH);
                     yield $path => [
                         'get' => [
+                            'operationId' => $link->rel(),
+                            'summary' => $link->title,
+                            'description' => $link->description,
                             'parameters' => f\map($link->fields, function($field) {
                                 return [
                                     'name' => $field->name,
@@ -47,10 +52,14 @@ final class OpenApi3 implements Format
                         ]
                     ];
                 }
+                /** @var Operation $operation */
                 foreach ($resource->operations as $operation) {
                     $path = parse_url($operation->url, PHP_URL_PATH);
                     yield $path => [
                         strtolower($operation->method) => array_filter([
+                            'operationId' => $operation->rel,
+                            'summary' => $operation->title,
+                            'description' => $operation->description,
                             'parameters' => f\map($operation->urlFields, function($field) {
                                 return [
                                     'name' => $field->name,

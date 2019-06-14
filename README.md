@@ -36,19 +36,19 @@ final class Hypermedia
     public function entrypoint(): Resource
     {
         return new Resource($this->urls->url('entrypoint'), [], [
-            new Link(['accounts'], $this->urls->template('accounts', ['limit' => '{limit}', 'offset' => '{offset}',]), false, 'List of all accounts'),
-            new Link(['account'], $this->urls->template('account'), true, 'Details of one account by id'),
-            new Link(['account-by-email'], $this->urls->template('account-by-email'), true, 'Details of one account by email'),
+            new Link(['accounts'], $this->urls->template('accounts', ['limit' => '{limit}', 'offset' => '{offset}',]), 'List of all accounts'),
+            new Link(['account'], $this->urls->template('account'), 'Details of one account by id'),
+            new Link(['account-by-email'], $this->urls->template('account-by-email'), 'Details of one account by email'),
         ], [
-            new Operation('create-account', 'POST', $this->urls->template('create-account'), false, 'Create a new account', '', [
-                new Field('email', 'email', true, 'ex: test@example.org'),
-                new Field('initial-credits', 'number', true, 'ex: 5000'),
-                new Field('with-mapping', 'text', true, 'yes'),
-                new Field('PAPO-project-id', 'text', true, ''),
+            new Operation('create-account', 'POST', $this->urls->template('create-account'), 'Create a new account', '', [
+                new Field('email', 'email', 'ex: test@example.org'),
+                new Field('initial-credits', 'number', 'ex: 5000'),
+                new Field('with-mapping', 'text', 'yes'),
+                new Field('PAPO-project-id', 'text', ''),
             ]),
-            new Operation('deactive-account', 'DELETE', $this->urls->template('deactivate-account'), true, 'Deactivate an account by id'),
-            new Operation('reactive-account', 'PUT', $this->urls->template('reactivate-account'), true, '(Re)activate an account by id'),
-            new Operation('credit-account', 'POST', $this->urls->template('credit-account'), true, 'Add new credits to an existing account', '', [
+            new Operation('deactive-account', 'DELETE', $this->urls->template('deactivate-account'), 'Deactivate an account by id'),
+            new Operation('reactive-account', 'PUT', $this->urls->template('reactivate-account'), '(Re)activate an account by id'),
+            new Operation('credit-account', 'POST', $this->urls->template('credit-account'), 'Add new credits to an existing account', '', [
                 new Field('amount', 'number', true, 'ex: 1000'),
             ]),
         ]);
