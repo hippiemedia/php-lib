@@ -16,14 +16,13 @@ use Hippiemedia\Operation;
 use Hippiemedia\Field;
 use Hippiemedia\Format;
 use Hippiemedia\Negotiate;
-use Hippiemedia\UrlGenerator;
 
 final class Hypermedia
 {
     private $urls;
     private $negotiate;
 
-    public function __construct(UrlGenerator $urls, Negotiate $negotiate)
+    public function __construct(SomeUrlGenerator $urls, Negotiate $negotiate)
     {
         $this->negotiate = $negotiate;
         $this->urls = $urls;
