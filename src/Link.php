@@ -15,9 +15,10 @@ final class Link
     public $title;
     public $description;
     public $isDeprecated;
+    public $extra = [];
     private $uriTemplate;
 
-    public function __construct(array $rel, string $href, string $title = null, string $description = null, string $type = null, bool $isDeprecated = false)
+    public function __construct(array $rel, string $href, string $title = null, string $description = null, string $type = null, bool $isDeprecated = false, array $extra = [])
     {
         $this->rel = $rel;
         $this->href = $href;
@@ -31,6 +32,7 @@ final class Link
         $this->description = $description;
         $this->type = $type;
         $this->isDeprecated = $isDeprecated;
+        $this->extra = $extra;
     }
 
     public static function whatever(array $data = [])

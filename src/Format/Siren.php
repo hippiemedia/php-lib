@@ -22,7 +22,7 @@ final class Siren implements Format
             'links' => f\map(array_values($resource->links), function($link) {
                 return [
                     'rel' => $link->rel,
-                    'class' => [],
+                    'class' => $link->extra['tags'] ?? [],
                     'href' => $link->href,
                     'title' => $link->title,
                     'type' => $link->type,
@@ -37,7 +37,7 @@ final class Siren implements Format
             'actions' => f\map(array_values($resource->operations), function($operation) {
                 return [
                     'name' => $operation->rel,
-                    'class' => [],
+                    'class' => $operation->extra['tags'] ?? [],
                     'method' => $operation->method,
                     'href' => $operation->url,
                     'title' => $operation->title,

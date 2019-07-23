@@ -49,6 +49,7 @@ final class OpenApi3 implements Format
                                 ];
                             }),
                             'responses' => ['default' => ['description' => 'ok']],
+                            'tags' => $link->extra['tags'] ?? [],
                         ]
                     ];
                 }
@@ -102,6 +103,7 @@ final class OpenApi3 implements Format
                             'responses' => ['default' => [
                                 'description' => 'ok',
                             ]],
+                            'tags' => $operation->extra['tags'] ?? [],
                         ]),
                     ];
                 }

@@ -18,9 +18,10 @@ final class Operation
     public $urlFields = [];
     public $fields = [];
     public $links;
+    public $extra = [];
     private $uriTemplate;
 
-    public function __construct(string $rel, string $method, string $url, string $title, string $description = '', array $fields = [], array $links = [])
+    public function __construct(string $rel, string $method, string $url, string $title, string $description = '', array $fields = [], array $links = [], array $extra = [])
     {
         $this->rel = $rel;
         $this->method = $method;
@@ -35,6 +36,7 @@ final class Operation
         $this->description = $description;
         $this->fields = $fields;
         $this->links = $links;
+        $this->extra = $extra;
     }
 
     public static function whatever(array $data = [])
