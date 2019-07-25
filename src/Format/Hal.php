@@ -36,6 +36,7 @@ final class Hal implements Format
                         'title' => $link->title,
                         'description' => $link->description,
                         'deprecation' => $link->isDeprecated,
+                        'tags' => $link->extra['tags'] ?? [],
                     ]));
                 });
             }),
@@ -49,16 +50,7 @@ final class Hal implements Format
                                 'method' => $operation->method,
                                 'contentType' => 'application/x-www-form-urlencoded',
                                 'properties' => $operation->fields,
-                                //'properties' => f\map($operation->fields, function($field) {
-                                //    return [
-                                //        'name' => $field->name,
-                                //        'description' => $field->description,
-                                //        'required' => false,
-                                //        'type' => 'text',
-                                //        'multiple' => true,
-                                //        'example' => '781096508204',
-                                //    ];
-                                //}),
+                                'tags' => $operation->extra['tags'] ?? [],
                             ],
                         ],
                     ], array_merge([new Link(['self'], $operation->url)], $operation->links), []));

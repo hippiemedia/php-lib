@@ -10,11 +10,11 @@ use Hippiemedia\Link;
 
 final class OpenApi3 implements Format
 {
-    private $defaults;
+    private $overrides;
 
-    public function __construct(array $defaults)
+    public function __construct(array $overrides)
     {
-        $this->defaults = $defaults;
+        $this->overrides = $overrides;
     }
 
     public function accepts(): string
@@ -24,13 +24,12 @@ final class OpenApi3 implements Format
 
     public function __invoke(Resource $resource): iterable
     {
-        return array_merge([
+        return array_replace_recursive([
             'openapi' => '3.0.0',
             'info' => [
                 'title' => 'oas3 api',
                 'version' => '0.0.1',
             ]],
-            $this->defaults,
             ['paths' => array_merge_recursive(
                 iterator_to_array((function() use($resource) {
                     /** @var Link $link */
@@ -79,7 +78,7 @@ final class OpenApi3 implements Format
                                                 'type' => 'object',
                                                 'properties' => iterator_to_array((function() use($operation) {
                                                     foreach ($operation->fields as $field) {
-                                                        yield $field['name'] => [
+                                                        yield $field->name => [
                                                             'type' => 'string',
                                                         ];
                                                     }
@@ -111,7 +110,8 @@ final class OpenApi3 implements Format
                         ];
                     }
                 })()),
-            )]
+            )],
+            $this->overrides
         );
     }
 }
