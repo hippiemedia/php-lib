@@ -36,22 +36,20 @@ final class Hal implements Format
                         'title' => $link->title,
                         'description' => $link->description,
                         'deprecation' => $link->isDeprecated,
-                        'tags' => $link->extra['tags'] ?? [],
-                    ]));
+                    ]), $link->extra);
                 });
             }),
             '_embedded' => array_merge(f\map($operationsByRel, function($operations) {
                 return f\map(array_values($operations), function($operation) {
                     return $this(new Resource($operation->url, [
                         '_templates' => [
-                            'default' => [
+                            'default' => array_merge([
                                 'title' => $operation->title,
                                 'description' => $operation->description,
                                 'method' => $operation->method,
                                 'contentType' => 'application/x-www-form-urlencoded',
                                 'properties' => $operation->fields,
-                                'tags' => $operation->extra['tags'] ?? [],
-                            ],
+                            ], $operation->extra),
                         ],
                     ], array_merge([new Link(['self'], $operation->url)], $operation->links), []));
                 });

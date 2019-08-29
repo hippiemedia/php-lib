@@ -36,7 +36,7 @@ final class OpenApi3 implements Format
                     foreach ($resource->links as $link) {
                         $path = parse_url($link->href, PHP_URL_PATH);
                         yield $path => [
-                            'get' => [
+                            'get' => array_merge([
                                 'operationId' => $link->rel(),
                                 'summary' => $link->title,
                                 'description' => $link->description,
@@ -49,8 +49,7 @@ final class OpenApi3 implements Format
                                     ];
                                 }),
                                 'responses' => ['default' => ['description' => 'ok']],
-                                'tags' => $link->extra['tags'] ?? [],
-                            ]
+                            ], $link->extra()),
                         ];
                     }
                 })()),
@@ -59,7 +58,7 @@ final class OpenApi3 implements Format
                     foreach ($resource->operations as $operation) {
                         $path = parse_url($operation->url, PHP_URL_PATH);
                         yield $path => [
-                            strtolower($operation->method) => array_filter([
+                            strtolower($operation->method) => array_filter(array_merge([
                                 'operationId' => $operation->rel,
                                 'summary' => $operation->title,
                                 'description' => $operation->description,
@@ -105,8 +104,7 @@ final class OpenApi3 implements Format
                                 'responses' => ['default' => [
                                     'description' => 'ok',
                                 ]],
-                                'tags' => $operation->extra['tags'] ?? [],
-                            ]),
+                            ], $operation->extra)),
                         ];
                     }
                 })()),
